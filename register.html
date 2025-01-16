@@ -58,6 +58,8 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
     import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-analytics.js";
     import { getAuth, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
+
     // TODO: Add SDKs for Firebase products that you want to use
     // https://firebase.google.com/docs/web/setup#available-libraries
   
@@ -76,8 +78,9 @@
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
+        const db = getFirestore(app);
 
-        // Event Listener with async/await
+        
         const button = document.getElementById('input');
         button.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -94,11 +97,36 @@
                 const user = userCredential.user;
                 console.log("sign up successful:", user);
                 alert("sign up successful!");
+
+                await addUsers(firstName, lastName, email, password, age, gift);
+
             } catch (error) {
                 console.error("Error:", error.code, error.message);
                 alert("Error: " + error.message);
             }
+
         });
+
+
+        async function addUsers(firstName, lastName, email, password, age, gift){
+        try {
+        const docRef = await addDoc(collection(db, "users"), {
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            password:password,
+            age:age,
+            gift:gift,
+        });
+        console.log(docRef.id);
+        
+        alert("user added successfully!");
+    } catch (e) {
+        console.error("Error adding product: ", e);
+        alert("Error adding product: " + e.message);
+    }
+}
+
 
          // Google Authentication
     const googleButton = document.getElementById('google-signin');
