@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="login.css">
+</head>
+<body>
+  <div class="container">
+    <div class="login-form">
+      <h2>Login</h2>
+      <form id="input">
+        <div class="input-group">
+          <label for="username">
+            <i class="fas fa-user"></i>
+            <input type="text" id="email" placeholder="email address">
+          </label>
+        </div>
+        <div class="input-group">
+          <label for="password">
+            <i class="fas fa-lock"></i>
+            <input type="password" id="password" placeholder=" password">
+          </label>
+        </div>
+    
+        <button type="submit" class="login-btn">LOGIN</button>
+        <div class="social-login">
+          <p>Or Sign Up Using</p>
+          <div class="social-icons">
+            <a href="#" id="google-signin"><i class="fab fa-google"></i></a>
+          </div>
+        </div>
+        <div class="signup-link">
+          <p>Or Sign Up Using</p>
+          <a href="register.html">SIGN UP</a>
+        </div>
+      </form>
+    </div>
+  </div>
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-analytics.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+// Your web app's Firebase configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyDuUT9rfZIp8sIiTTI5Y4HWjds2mEBAvm4",
+        authDomain: "firstproject-11b91.firebaseapp.com",
+        projectId: "firstproject-11b91",
+        storageBucket: "firstproject-11b91.firebasestorage.app",
+        messagingSenderId: "305969919191",
+        appId: "1:305969919191:web:f23ac9dc9bf4e96f49ec92",
+        measurementId: "G-M9HS4HPY4L"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    // Event Listener with async/await
+    const button = document.getElementById('input');
+    button.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+
+        try {
+            const userCredential = await signInWithEmailAndPassword(auth, email, password);
+            const user = userCredential.user;
+            console.log("Login successful:", user);
+            alert("Login successful!");
+        } catch (error) {
+    if (error.code === 'auth/user-not-found') {
+        alert("User not found. Please sign up first.");
+    } else if (error.code === 'auth/wrong-password') {
+        alert("Incorrect password. Please try again.");
+    } else {
+        alert("Error: " + error.message);
+    }
+        }
+    });
+
+    // Google Authentication
+    const googleButton = document.getElementById('google-signin');
+    googleButton.addEventListener('click', async (e) => {
+      e.preventDefault();
+
+      const provider = new GoogleAuthProvider();
+      try {
+        const result = await signInWithPopup(auth, provider);
+        const user = result.user;
+        console.log("Google sign in successful:", user);
+        alert("Google sign in successful!");
+      } catch (error) {
+        console.error("Google Sign-In Error:", error.code, error.message);
+        alert("Error: " + error.message);
+      }
+    });
+
+</script>
+</body>
+</html>
