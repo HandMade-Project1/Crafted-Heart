@@ -1,66 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="contact us.css" />
+    <link rel="stylesheet" href="contact.css" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>contact us</title>
+    <title>Document</title>
   </head>
   <body>
-    <main>
-      <div><img src="home-01-1920x1272.jpg" alt="" /></div>
-      <div class="main-container">
-        <div class="container">
-          <div><h2>Get in touch</h2></div>
-          <div>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Expossimus, consectetur porro sapiente minus iure.
-            </p>
-          </div>
-          <div><p>Lorem, ipsum dolor.</p></div>
-          <div class="row">
-            <div>
-              <label for="firstname">First Name</label>
-              <input type="text" id="firstname" />
-            </div>
-            <div>
-              <label for="secondname">Second Name</label>
-              <input type="text" id="secondname" />
-            </div>
-          </div>
-          <div class="row">
-            <div>
-              <label for="email">E-mail</label>
-              <input type="text" id="email" />
-            </div>
-            <div>
-              <label for="phone">Phone</label>
-              <input type="text" id="phone" />
-            </div>
-          </div>
-          <div class="row">
-            <div>
-              <label for="message">Message</label>
-              <input type="text" id="message" />
-            </div>
-          </div>
-          <button id="submit" type="submit">Submit</button>
-        </div>
-        <div class="container-2">
-          <h3>Follow us</h3>
-          <hr>
-          <div class="socialicons">
-            <a href="https://www.instagram.com/bilal.zaro/"></a>
-          </div>
-        </div>
+    <div id="cont" class="contact-container">
+      <div class="contact-image">
+        <img
+          src="cong-removebg.png"
+          alt="Illustration of person sitting in chair"
+        />
       </div>
-    </main>
+      <div class="contact-form">
+        <h1 class="allTitles">Get in touch</h1>
+        <p>
+          Email us with any questions or inquiries or use our contact data💌. We would be happy to answer your questions👂.</p>
+
+        <form>
+          <div class="form-group">
+            <input type="text" placeholder="Full Name *" required />
+          </div>
+          <div class="form-group">
+            <input type="email" placeholder="Email *" required />
+          </div>
+          <div class="form-group">
+            <textarea placeholder="Message *" required></textarea>
+          </div>
+          <button type="submit" class="submit-button">Say Hello 👋</button>
+        </form>
+      </div>
+    </div>
   </body>
 </html>
