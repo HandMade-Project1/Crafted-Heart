@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
 import { getAuth } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
-import { getFirestore } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
+import { getFirestore ,onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -18,6 +18,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
+const user = auth.currentUser;
 
 // Export the Firebase services
 export { app, auth, db };
@@ -47,8 +48,6 @@ let form = document.getElementById('searchForm').addEventListener('submit' , fun
              let matchesQuery = products.name.toLowerCase().includes(searchQuery);
             return matchesCategory && matchesQuery;
     });
-
-
     // if (filteredProducts.length > 0){
     //     // let resultsHTML = filteredProducts.map(product => `<li>${product.name} (${product.category})</li>`).join('');
     //     // searchResultsDiv.innerHTML = `<ul>${resultsHTML}</ul>`;
@@ -62,7 +61,55 @@ if (filteredProducts.length > 0) {
 } else {
     alert("No products found");
 }
-
 })
 
+
+
+// Event listener to track the auth state (when user signs in or out)
+auth.onAuthStateChanged(async (user) => {
+  console.log("Auth state changed:", user);
+
+  if (user) {
+    console.log("User ID:", user.uid);
+    // Fetch user name and display it
+    await fetchAndDisplayUserName(user.uid);
+  } else {
+    console.log("No user signed in.");
+    // You can also clear the welcome message or do any other necessary actions
+    document.getElementById("welcome-message").textContent = "Please log in to see your profile.";
+  }
+});
+
+// Initialize Firebase Authentication
+auth.onAuthStateChanged((user) => {
+    console.log("Auth state changed:", user);
+    if (user) {
+      console.log("User ID:", user.uid);
+      fetchAndDisplayUserName(user.uid);
+  
+    } else {
+      console.log("No user signed in.");
+    }
+  });
+  
+      // Function to fetch and display the user's name dynamically
+      async function fetchAndDisplayUserName(uid) {
+          try {
+      // Reference the user document in the "users" collection
+      const userDocRef = doc(db, "users", uid);
+  
+      // Fetch the document data
+      const userDoc = await getDoc(userDocRef);
+  
+      if (userDoc.exists()) {
+        // Retrieve and display the user's first name
+        const userName = userDoc.data().firstName;
+        document.getElementById("welcome-message").textContent = `${userName}!`;
+      } else {
+        console.error("No user data found");
+      }
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+    }
+      }
 
