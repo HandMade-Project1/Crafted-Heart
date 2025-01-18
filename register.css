@@ -3,7 +3,7 @@
 body {
   margin: 0;
   font-family: 'Poppins';
-  background-color: #C4C1E4;
+  background-color: white;
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -13,7 +13,7 @@ body {
 .container {
   width: 100%;
   max-width: 400px;
-  background: white;
+  background:#C4C1E4;
   border-radius: 10px;
   box-shadow: 0 0 40px 3px #ac7ac9;
   animation: bombing 4s 2s ease-in-out infinite;  padding: 20px;
