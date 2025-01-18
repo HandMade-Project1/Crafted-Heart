@@ -92,7 +92,7 @@ auth.onAuthStateChanged((user) => {
     }
   });
   
-      // Function to fetch and display the user's name dynamically
+      ////////// Function to fetch and display the user's name dynamically//////////
       async function fetchAndDisplayUserName(uid) {
           try {
       // Reference the user document in the "users" collection
