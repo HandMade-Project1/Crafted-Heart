@@ -3,7 +3,7 @@
 body {
   margin: 0;
   font-family: 'Poppins';
-  background: linear-gradient(135deg, #CED0F3, #a884c9);
+  background-color: white;
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -13,11 +13,23 @@ body {
 .container {
   width: 100%;
   max-width: 400px;
-  background: white;
+  background:#C4C1E4;
   border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  padding: 20px;
+  box-shadow: 0 0 40px 3px #ac7ac9;
+  animation: bombing 4s 2s ease-in-out infinite;  padding: 20px;
 }
+
+@keyframes bombing {
+    0% {
+      box-shadow: 0 0 40px 3px #8450a2;
+    }
+    50% {
+      box-shadow: 0 0 5px 1px #8450a2;
+    }
+    100% {
+      box-shadow: 0 0 40px 3px #8450a2;
+    }
+  }
 
 .login-form h2 {
   text-align: center;
@@ -72,6 +84,8 @@ body {
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(124, 39, 148, 0.2);
   }
+
+  
   
 
 .social-login {

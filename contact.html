@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="contact.css" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Contact Form</title>
   </head>
   <body>
     <div id="cont" class="contact-container">
@@ -17,7 +17,9 @@
       <div class="contact-form">
         <h1 class="allTitles">Get in touch</h1>
         <p>
-          Email us with any questions or inquiries or use our contact data💌. We would be happy to answer your questions👂.</p>
+          Email us with any questions or inquiries or use our contact data💌. We
+          would be happy to answer your questions👂.
+        </p>
 
         <form>
           <div class="form-group">
@@ -29,9 +31,48 @@
           <div class="form-group">
             <textarea placeholder="Message *" required></textarea>
           </div>
-          <button type="submit" class="submit-button">Say Hello 👋</button>
+          <button type="submit" class="submit-button">Submit</button>
         </form>
       </div>
     </div>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script>
+      const firebaseConfig = {
+        apiKey: "AIzaSyAC2zpAE0YqT_zQG1zwYjmjgBiKjDfvlA8",
+        authDomain: "crafted-heart.firebaseapp.com",
+        projectId: "crafted-heart",
+        storageBucket: "crafted-heart.firebasestorage.app",
+        messagingSenderId: "356981294414",
+        appId: "1:356981294414:web:ea3a6c8e9dd59df7728a1f",
+        measurementId: "G-PQ9WCXTS0L",
+      };
+
+      firebase.initializeApp(firebaseConfig);
+      const db = firebase.firestore();
+
+      document.querySelector("form").addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const name = e.target[0].value;
+        const email = e.target[1].value;
+        const message = e.target[2].value;
+
+        try {
+          const docRef = await db.collection("contactMessages").add({
+            fullName: name,
+            email: email,
+            message: message,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+          });
+          alert("Message sent successfully!");
+          e.target.reset();
+        } catch (error) {
+          console.error("Error adding document: ", error);
+          alert("Failed to send message. Please try again later.");
+        }
+      });
+    </script>
   </body>
 </html>
