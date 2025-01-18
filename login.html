@@ -21,17 +21,12 @@
         <div class="input-group">
           <label for="password">
             <i class="fas fa-lock"></i>
-            <input type="password" id="password" placeholder=" password">
+            <input type="password" id="password" placeholder=" password" href="index.html">
           </label>
         </div>
     
         <button type="submit" class="login-btn">LOGIN</button>
-        <div class="social-login">
-          <p>Or Sign Up Using</p>
-          <div class="social-icons">
-            <a href="#" id="google-signin"><i class="fab fa-google"></i></a>
-          </div>
-        </div>
+        
         <div class="signup-link">
           <p>Or Sign Up Using</p>
           <a href="register.html">SIGN UP</a>
@@ -43,7 +38,7 @@
     // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-analytics.js";
-import { getAuth, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+import { getAuth, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
 // Your web app's Firebase configuration
     const firebaseConfig = {
         apiKey: "AIzaSyDuUT9rfZIp8sIiTTI5Y4HWjds2mEBAvm4",
@@ -72,33 +67,19 @@ import { getAuth, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthPro
             const user = userCredential.user;
             console.log("Login successful:", user);
             alert("Login successful!");
+            window.location.href = 'index.html';
         } catch (error) {
     if (error.code === 'auth/user-not-found') {
         alert("User not found. Please sign up first.");
     } else if (error.code === 'auth/wrong-password') {
         alert("Incorrect password. Please try again.");
     } else {
-        alert("Error: " + error.message);
-    }
+      console.error(error);
+      }
         }
     });
 
-    // Google Authentication
-    const googleButton = document.getElementById('google-signin');
-    googleButton.addEventListener('click', async (e) => {
-      e.preventDefault();
 
-      const provider = new GoogleAuthProvider();
-      try {
-        const result = await signInWithPopup(auth, provider);
-        const user = result.user;
-        console.log("Google sign in successful:", user);
-        alert("Google sign in successful!");
-      } catch (error) {
-        console.error("Google Sign-In Error:", error.code, error.message);
-        alert("Error: " + error.message);
-      }
-    });
 
 </script>
 </body>
