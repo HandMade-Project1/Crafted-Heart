@@ -145,7 +145,7 @@ const loadReviews = async () => {
           const reviewElement = document.createElement("div");
           reviewElement.classList.add("review");
           reviewElement.innerHTML = `
-              <h3>${rating}/5</h3>
+              <h3>${rating}/5</h3>git 
               <h3>${title}</h3>
               <p>${review}</p>
               <small>${new Date(timestamp?.toDate()).toLocaleString()}</small>
