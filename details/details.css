@@ -67,6 +67,7 @@ body {
   }
   
   .checkout-button {
+    text-decoration: none;
     padding: 12px 24px;
     font-size: 18px;
     background-color: #c94e50;
