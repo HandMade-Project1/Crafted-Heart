@@ -16,7 +16,6 @@ const firebaseConfig = {
   measurementId: "G-PQ9WCXTS0L",
 };
 
-
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
@@ -60,12 +59,12 @@ function renderProductDetails(product) {
       <div class="product-details-image">
         <img src="${product.imageURL}" alt="${product.name}">
       </div>
-      <div class="product-details-content">
-        <h2>${product.name}</h2>
+      <div class="product-details-content"><br>
+        <h2>${product.name}</h2><br>
         <h5>Description:</h5>
         <p>${product.description}</p>
         <span class="product-details-price">Price: $${product.price}.00</span>
-          <button class="checkout-button">Check Out</button>
+          <a class="checkout-button" href="../checkOut.html">Check Out</a>
     </div>
   `;
 }
@@ -103,18 +102,18 @@ const updateRating = (rating) => {
 form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const title = form.title.value.trim();
+    const name = form.name.value.trim();
     const rating = parseInt(ratingInput.value);
     const review = form.review.value.trim();
 
-    if (!title || !rating || !review) {
+    if (!name || !rating || !review) {
         alert("Please fill out all fields and select a rating.");
         return;
     }
 
     try {
         await addDoc(reviewsCollection, {
-            title,
+            name,
             rating,
             review,
             productId,
@@ -141,14 +140,14 @@ const loadReviews = async () => {
       const querySnapshot = await getDocs(q); 
 
       querySnapshot.forEach((doc) => {
-          const { title, rating, review, timestamp } = doc.data();
-          console.log(title,rating,review,timestamp);
+          const { name, rating, review, timestamp } = doc.data();
+          console.log(name,rating,review,timestamp);
           const reviewElement = document.createElement("div");
           reviewElement.classList.add("review");
           reviewElement.innerHTML = `
-              <h3>${rating}/5</h3>git 
-              <h3>${title}</h3>
-              <p>${review}</p>
+          <small>${name}</small>
+              <h3>${rating}/5</h3> 
+              <h3>${review}</h3>
               <small>${new Date(timestamp?.toDate()).toLocaleString()}</small>
           `;
           reviewsDiv.appendChild(reviewElement);

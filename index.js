@@ -36,6 +36,13 @@ let products = [
   { name: "Plant Straw", category: "Wool Gift" },
 ];
 
+document.getElementById("category").addEventListener("change", function () {
+  const selectedValue = this.value; 
+  if (selectedValue) {
+    window.location.href = selectedValue; 
+  }
+});
+
 document.getElementById("searchForm").addEventListener("submit", function (e) {
   e.preventDefault();
 
@@ -61,45 +68,45 @@ document.getElementById("searchForm").addEventListener("submit", function (e) {
   }
 });
 
-
-
 ////////////////// to hide and display login and sign up buttons if user //////////////////////////////////////
 auth.onAuthStateChanged((user) => {
-    console.log("Auth state changed:", user);
-  
-    const welcomeMessageElement = document.getElementById("welcome-message");
-    const loginButton = document.getElementById("login-button");
-    const signupButton = document.getElementById("signup-button");
-  
-    if (user) {
-      console.log("User ID:", user.uid);
-      fetchAndDisplayUserName(user.uid);
-  
-      loginButton.style.display = "none";
-      signupButton.style.display = "none";
-    } else {
-      console.log("No user signed in.");
+  console.log("Auth state changed:", user);
 
-      loginButton.style.display = "block";
-      signupButton.style.display = "block";
-  
-      welcomeMessageElement.textContent = "";
-    }
-  });
+  const welcomeMessageElement = document.getElementById("welcome-message");
+  const loginButton = document.getElementById("login-button");
+  const signupButton = document.getElementById("signup-button");
+
+  if (user) {
+    // console.log("hellllooooo")
+    console.log("User ID:", user.uid);
+    fetchAndDisplayUserName(user.uid);
+
+    loginButton.style.display = "none";
+    signupButton.style.display = "none";
+  } else {
+    console.log("No user signed in.");
+
+    loginButton.style.display = "block";
+    signupButton.style.display = "block";
+
+    welcomeMessageElement.textContent = "";
+  }
+});
 // // Function to fetch and display the user's name dynamically
 async function fetchAndDisplayUserName(uid) {
-    try {
-      const userDocRef = doc(db, "users", uid);
-      const userDoc = await getDoc(userDocRef);
-  
-      if (userDoc.exists()) {
-        const userName = userDoc.data().firstName;
-        document.getElementById("welcome-message").innerHTML = `Welcome <span id="user-name">${userName}</span>!`;
+  try {
+    const userDocRef = doc(db, "users", uid);
+    const userDoc = await getDoc(userDocRef);
+
+    if (userDoc.exists()) {
+      const userName = userDoc.data().firstName;
+      document.getElementById(
+        "welcome-message"
+      ).innerHTML = `Welcome <span id="user-name">${userName}</span>!`;
     } else {
-        console.error("No user data found");
-      }
-    } catch (error) {
-      console.error("Error fetching user data:", error);
+      console.error("No user data found");
     }
+  } catch (error) {
+    console.error("Error fetching user data:", error);
   }
-  
+}
