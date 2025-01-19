@@ -16,7 +16,7 @@ h1 {
 
 .product-details {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
   padding: 20px;
   border: none;
@@ -98,7 +98,6 @@ button:hover {
   background-color: #45a049;
 }
 
-
 @media (max-width: 768px) {
   .product-details-card {
     flex-direction: column;
@@ -113,4 +112,153 @@ button:hover {
   .product-details-content {
     align-items: center;
   }
+
+  .container {
+    width: 100%;
+    padding: 20px;
+  }
+
+  .form-container {
+    width: 100%;
+  }
+
+  .reviews {
+    width: 100%;
+  }
+}
+
+.container {
+  width: 600px;
+  margin-top: 50px;
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-container {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+textarea {
+  resize: none;
+}
+
+.btn {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.btn:hover {
+  background-color: #0056b3;
+}
+
+.reviews {
+  width: 100%;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.review {
+  border-bottom: 2px solid #d5bafa;
+  padding: 10px 0;
+}
+
+.review:last-child {
+  border-bottom: none;
+}
+
+.card {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.star {
+  font-size: 3rem;
+  cursor: pointer;
+  transition: color 0.2s ease-in;
+}
+
+.star:hover {
+  color: rgb(255, 214, 0); /* لون التفاعل عند المرور بالماوس */
+}
+
+.star.one {
+  color: rgb(255, 0, 0);
+}
+
+.star.two {
+  color: rgb(255, 106, 0);
+}
+
+.star.three {
+  color: rgb(255, 208, 0);
+}
+
+.star.four {
+  color: rgb(255, 242, 0);
+}
+
+.star.five {
+  color: rgb(239, 252, 0);
+}
+
+.star.selected.one {
+  color: rgb(255, 0, 0); /* عند تحديد النجمة 1 */
+}
+
+.star.selected.two {
+  color: rgb(255, 106, 0); /* عند تحديد النجمة 2 */
+}
+
+.star.selected.three {
+  color: rgb(255, 208, 0); /* عند تحديد النجمة 3 */
+}
+
+.star.selected.four {
+  color: rgb(255, 242, 0); /* عند تحديد النجمة 4 */
+}
+
+.star.selected.five {
+  color: rgb(239, 252, 0); /* عند تحديد النجمة 5 */
 }
