@@ -95,14 +95,14 @@
     <div class="top_header">
       <div class="container">
         <a href="#" class="logo"> <img src="crf.png" alt=""></a>
-        <form action="product.html" class="search_box" id="searchForm">
+        <form action="./products/index.html" class="search_box" id="searchForm">
           <div class="select_box">
             <select id="category" name="category">
-              <option value="All Categories">All Categories</option>
-              <option value="Candles Gift">Candles Gift</option>
-              <option value="Home Decor Gift">Home Decor Gift</option>
-              <option value="Wool Gift">Wool Gift</option>
-              <option value="Embroidery Gift">Embroidery Gift</option>
+              <option value="products/index.html">All Categories</option>
+              <option value="products/index.html">Candles Gift</option>
+              <option value="products/index.html">Home Decor Gift</option>
+              <option value="products/index.html">Wool Gift</option>
+              <option value="products/index.html">Embroidery Gift</option>
             </select>
           </div>
           <input type="text" name="search" id="search" placeholder="Search for Categories" required>
@@ -117,9 +117,9 @@
               <i class="fa-regular fa-heart" style="color: #C4C1E4;"></i>
             </a>
           </div>
-          <div onclick="open_close_cart()" class="icon">
-            <a href="#">
-              <i class="fa-solid fa-cart-shopping" style="color: #C4C1E4;"></i>
+          <div class="icon">
+            <a href="userProfile.html">
+              <i class="fa-solid fa-user" style="color: #C4C1E4;"></i>
             </a>
           </div>
         </div>
@@ -136,8 +136,8 @@
           </ul>
         </nav>
         <div class="login_signup btns">
-          <a href="login.html" class="btn">Login <i class="fa-solid fa-right-to-bracket"></i></a>
-          <a href="register.html" class="btn">Sign UP <i class="fa-solid fa-user-plus"></i></a>
+          <a href="login.html" class="btn" id="login-button">Login <i class="fa-solid fa-right-to-bracket"></i></a>
+          <a href="register.html" class="btn" id="signup-button">Sign UP <i class="fa-solid fa-user-plus"></i></a>
         </div>
       </div>
     </div>
