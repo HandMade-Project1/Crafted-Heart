@@ -61,39 +61,9 @@ document.getElementById("searchForm").addEventListener("submit", function (e) {
   }
 });
 
-// // Event listener to track the auth state (when user signs in or out)
 
-// auth.onAuthStateChanged((user) => {
-//   console.log("Auth state changed:", user);
-//   if (user) {
-//     console.log("User ID:", user.uid);
-//     fetchAndDisplayUserName(user.uid);
-//   } else {
-//     console.log("No user signed in.");
-//   }
-// });
 
-// // Function to fetch and display the user's name dynamically
-// async function fetchAndDisplayUserName(uid) {
-//   try {
-//     // Reference the user document in the "users" collection
-//     const userDocRef = doc(db, "users", uid);
-
-//     // Fetch the document data
-//     const userDoc = await getDoc(userDocRef);
-
-//     if (userDoc.exists()) {
-//       // Retrieve and display the user's first name
-//       const userName = userDoc.data().firstName;
-//       document.getElementById("welcome-message").textContent = `Welcome ${userName}!`;
-//     } else {
-//       console.error("No user data found");
-//     }
-//   } catch (error) {
-//     console.error("Error fetching user data:", error);
-//   }
-// }
-
+////////////////// to hide and display login and sign up buttons if user //////////////////////////////////////
 auth.onAuthStateChanged((user) => {
     console.log("Auth state changed:", user);
   
@@ -103,34 +73,29 @@ auth.onAuthStateChanged((user) => {
   
     if (user) {
       console.log("User ID:", user.uid);
-      // عرض اسم المستخدم والترحيب به
       fetchAndDisplayUserName(user.uid);
   
-      // إخفاء أزرار تسجيل الدخول والتسجيل لأن المستخدم قام بتسجيل الدخول
       loginButton.style.display = "none";
       signupButton.style.display = "none";
     } else {
       console.log("No user signed in.");
-      // عرض أزرار تسجيل الدخول والتسجيل
+
       loginButton.style.display = "block";
       signupButton.style.display = "block";
   
-      // إخفاء رسالة الترحيب إذا لم يكن هناك مستخدم مسجّل دخول
       welcomeMessageElement.textContent = "";
     }
   });
-  
-  // دالة لعرض اسم المستخدم بعد التحقق
-  async function fetchAndDisplayUserName(uid) {
+// // Function to fetch and display the user's name dynamically
+async function fetchAndDisplayUserName(uid) {
     try {
-      // الحصول على بيانات المستخدم من Firestore باستخدام UID
       const userDocRef = doc(db, "users", uid);
       const userDoc = await getDoc(userDocRef);
   
       if (userDoc.exists()) {
         const userName = userDoc.data().firstName;
-        document.getElementById("welcome-message").textContent = `Welcome ${userName}!`;
-      } else {
+        document.getElementById("welcome-message").innerHTML = `Welcome <span id="user-name">${userName}</span>!`;
+    } else {
         console.error("No user data found");
       }
     } catch (error) {

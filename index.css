@@ -12,30 +12,37 @@ body {
     background-color: #fff;
     color: #333;
     line-height: 1.6;
-    opacity: 0; /* العنصر مخفي */
-    transform: translateY(-30px); /* العنصر سيكون بعيدًا 30px من الأعلى */
-    animation: slideIn 2s ease-out forwards; /* تطبيق الحركة */
+    opacity: 0; 
+    transform: translateY(-30px); 
+    animation: slideIn 2s ease-out forwards; 
 }
 #welcome-message {
     font-family: 'Poppins', sans-serif;
-    font-size: 24px;
-    color: #9792d2; /* اللون الأخضر */
+    font-style: italic;
+    font-weight: 200px;
+    font-size: 28px;
+    color: black;
     text-align: center;
-    margin-top: 20px;
-    padding: 10px;
     border-radius: 5px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
+  #user-name {
+    font-family: 'Poppins', sans-serif;
+    color: #948de1;  
+    font-weight: bold;
+    font-size: 32px;
+  }
+  
 
   /* تعريف الحركة باستخدام keyframes */
   @keyframes slideIn {
     0% {
-      opacity: 0; /* في البداية مخفي */
-      transform: translateY(-30px); /* من أعلى الصفحة */
+      opacity: 0; 
+      transform: translateY(-30px); 
     }
     100% {
-      opacity: 1; /* في النهاية يظهر */
-      transform: translateY(0); /* يعود إلى وضعه الطبيعي */
+      opacity: 1;
+      transform: translateY(0); 
     }
   }
   
@@ -202,7 +209,7 @@ button:focus {
 
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
-    background-color: #C4C1E4;
+    background-color: #bbb7de;
     border-radius: 50%;
 }
 
@@ -283,8 +290,7 @@ button:focus {
 }
 
 .card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    transform: scale(1.07);
 }
 
 .card-img-top {
