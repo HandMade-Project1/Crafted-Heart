@@ -2,8 +2,9 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebas
 import {
   doc,
   getDoc,
-  getFirestore,
+  getFirestore, collection,   addDoc,  getDocs, query,   orderBy,   serverTimestamp 
 } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore.js";
+import { where } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAC2zpAE0YqT_zQG1zwYjmjgBiKjDfvlA8",
@@ -72,13 +73,97 @@ function renderProductDetails(product) {
 async function fetchProductDetails() {
   const product = await getProductById(productId);
 
-  console.log(product);
-
   if (product) {
     renderProductDetails(product);
   } else {
     productDetailsContainer.innerHTML = "<p>Product not found.</p>";
   }
 }
+
+
+
+const reviewsCollection = collection(db, "reviews");
+
+const form = document.getElementById("review-form");
+const reviewsDiv = document.getElementById("reviews");
+const stars = document.getElementsByClassName("star");
+const ratingInput = document.getElementById("rating");
+
+const updateRating = (rating) => {
+    ratingInput.value = rating;
+
+    Array.from(stars).forEach((star, index) => {
+        star.className = "star";
+        if (index < rating) {
+            star.classList.add(["one", "two", "three", "four", "five"][rating - 1]);
+        }
+    });
+};
+
+form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const title = form.title.value.trim();
+    const rating = parseInt(ratingInput.value);
+    const review = form.review.value.trim();
+
+    if (!title || !rating || !review) {
+        alert("Please fill out all fields and select a rating.");
+        return;
+    }
+
+    try {
+        await addDoc(reviewsCollection, {
+            title,
+            rating,
+            review,
+            productId,
+            timestamp: serverTimestamp()
+        });
+        form.reset();
+        Array.from(stars).forEach(star => star.className = "star");
+        loadReviews();
+    } catch (error) {
+        console.error("Error adding review:", error);
+    }
+});
+
+const loadReviews = async () => {
+  reviewsDiv.innerHTML = "";  
+
+  try {
+      const q = query(
+          reviewsCollection, 
+          where("productId", "==", productId),
+          orderBy("timestamp", "desc")
+      );
+
+      const querySnapshot = await getDocs(q); 
+
+      querySnapshot.forEach((doc) => {
+          const { title, rating, review, timestamp } = doc.data();
+          console.log(title,rating,review,timestamp);
+          const reviewElement = document.createElement("div");
+          reviewElement.classList.add("review");
+          reviewElement.innerHTML = `
+              <h3>${rating}/5</h3>git 
+              <h3>${title}</h3>
+              <p>${review}</p>
+              <small>${new Date(timestamp?.toDate()).toLocaleString()}</small>
+          `;
+          reviewsDiv.appendChild(reviewElement);
+      });
+  } catch (error) {
+      console.error("Error loading reviews:", error);
+  }
+};
+
+
+Array.from(stars).forEach((star, index) => {
+    star.addEventListener("click", () => updateRating(index + 1));
+});
+
+loadReviews();
+
 
 fetchProductDetails();

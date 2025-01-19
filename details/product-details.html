@@ -11,6 +11,44 @@
 <body>
     <h1>Product Details</h1>
     <div id="product-details-container" class="product-details"></div>
+    
+<!-- Main Parent Container -->
+<div class="container">
+    <!-- Form Section -->
+    <div class="form-container">
+        <h1>Product Reviews</h1>
+
+        <!-- Review Form -->
+        <form id="review-form" class="review-form">
+            <div class="form-group">
+                <label for="rating">Rating:</label>
+                <div id="star-rating" class="card">
+                    <span onclick="updateRating(1)" class="star">★</span>
+                    <span onclick="updateRating(2)" class="star">★</span>
+                    <span onclick="updateRating(3)" class="star">★</span>
+                    <span onclick="updateRating(4)" class="star">★</span>
+                    <span onclick="updateRating(5)" class="star">★</span>
+                </div>
+                <input type="hidden" id="rating" name="rating" required>
+            </div>
+            <div class="form-group">
+                <label for="title">Review title:</label>
+                <input type="text" id="title" name="title" required>
+            </div>
+            <div class="form-group">
+                <label for="review">Your Review:</label>
+                <textarea id="review" name="review" rows="4" required></textarea>
+            </div>
+            <button type="submit" class="btn">Submit Review</button>
+        </form>
+    </div>
+
+    <!-- Reviews Section -->
+    <div class="reviews" id="reviews"></div>
+</div>
+
+
+
     <script src="product-details.js" type="module"></script>
 </body>
 
